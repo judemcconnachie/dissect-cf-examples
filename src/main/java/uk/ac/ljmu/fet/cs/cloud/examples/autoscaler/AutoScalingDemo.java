@@ -126,7 +126,7 @@ public class AutoScalingDemo implements TraceExhaustionCallback {
 
 		// Simple job dispatching mechanism which first prepares the workload
 		Progress progress = new Progress(this);
-		JobLauncher launcher = new FirstFitJobScheduler(vi, progress);
+		JobLauncher launcher = new RoundRobinJobScheduler(vi, progress);
 		QueueManager qm = new QueueManager(launcher);
 		jobhandler = new JobArrivalHandler(FileBasedTraceProducerFactory.getProducerFromFile(traceFileLoc, 0, 1000000,
 				false, nodes * cores, DCFJob.class), launcher, qm, progress);
